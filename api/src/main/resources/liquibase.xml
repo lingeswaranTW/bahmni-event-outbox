@@ -8,11 +8,11 @@
     <changeSet id="bahmni-event-outbox-20260323-1" author="bahmni">
         <preConditions onFail="MARK_RAN">
             <not>
-                <tableExists tableName="event_records_queue"/>
+                <tableExists tableName="event_records_queue1"/>
             </not>
         </preConditions>
         <comment>Create event_records_queue table for the Bahmni event outbox pattern</comment>
-        <createTable tableName="event_records_queue">
+        <createTable tableName="event_records_queue1">
             <column name="id" type="int" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
             </column>

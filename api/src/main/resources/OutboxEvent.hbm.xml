@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="org.bahmni.module.eventoutbox.model">
+    <class name="OutboxEvent" table="event_records_queue1">
+        <id name="id" type="int" column="id">
+            <generator class="native"/>
+        </id>
+        <property name="uuid" column="uuid" type="java.lang.String"/>
+        <property name="title" column="title" type="java.lang.String"/>
+        <property name="timestamp" column="timestamp" type="java.util.Date"/>
+        <property name="uri" column="uri" type="java.lang.String"/>
+        <property name="object" column="object" type="java.lang.String"/>
+        <property name="category" column="category" type="java.lang.String"/>
+        <property name="tags" column="tags" type="java.lang.String"/>
+    </class>
+</hibernate-mapping>

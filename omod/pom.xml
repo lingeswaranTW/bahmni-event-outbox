@@ -2,20 +2,20 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>org.bahmni</groupId>
-		<artifactId>bahmni-event-outbox</artifactId>
+		<groupId>org.bahmni.module</groupId>
+		<artifactId>eventoutbox</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>bahmni-event-outbox-omod</artifactId>
+	<artifactId>eventoutbox-omod</artifactId>
 	<packaging>jar</packaging>
 	<name>Bahmni Event Outbox Module OMOD</name>
 	<description>OMOD package for Bahmni Event Outbox Module</description>
 
 	<dependencies>
 		<dependency>
-			<groupId>org.bahmni</groupId>
-			<artifactId>bahmni-event-outbox-api</artifactId>
+			<groupId>org.bahmni.module</groupId>
+			<artifactId>eventoutbox-api</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
 		<dependency>
@@ -27,6 +27,12 @@
 	</dependencies>
 
 	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -37,6 +43,13 @@
 				<artifactId>maven-openmrs-plugin</artifactId>
 				<extensions>true</extensions>
 				<executions>
+					<execution>
+						<id>init</id>
+						<phase>initialize</phase>
+						<goals>
+							<goal>initialize-module</goal>
+						</goals>
+					</execution>
 					<execution>
 						<id>pack</id>
 						<phase>package</phase>
@@ -58,7 +71,7 @@
 						</goals>
 						<configuration>
 							<includeGroupIds>${project.parent.groupId}</includeGroupIds>
-							<includeArtifactIds>bahmni-event-outbox-api</includeArtifactIds>
+							<includeArtifactIds>eventoutbox-api</includeArtifactIds>
 							<excludeTransitive>true</excludeTransitive>
 							<includes>**/*.xml,**/*.properties</includes>
 							<outputDirectory>${project.build.directory}/classes</outputDirectory>

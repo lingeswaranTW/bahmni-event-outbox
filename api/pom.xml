@@ -2,12 +2,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>org.bahmni</groupId>
-		<artifactId>bahmni-event-outbox</artifactId>
+		<groupId>org.bahmni.module</groupId>
+		<artifactId>eventoutbox</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>bahmni-event-outbox-api</artifactId>
+	<artifactId>eventoutbox-api</artifactId>
 	<packaging>jar</packaging>
 	<name>Bahmni Event Outbox Module API</name>
 	<description>API classes for Bahmni Event Outbox Module</description>
