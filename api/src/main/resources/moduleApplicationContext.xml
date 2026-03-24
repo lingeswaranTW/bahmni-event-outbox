@@ -9,30 +9,4 @@
 
     <context:component-scan base-package="org.bahmni.module.eventoutbox"/>
 
-    <bean id="outboxEventDao" class="org.bahmni.module.eventoutbox.dao.impl.OutboxEventDaoImpl">
-        <property name="sessionFactory">
-            <ref bean="sessionFactory"/>
-        </property>
-    </bean>
-
-    <bean id="outboxEventServiceTarget" class="org.bahmni.module.eventoutbox.service.impl.OutboxEventServiceImpl">
-        <property name="outboxEventDao">
-            <ref bean="outboxEventDao"/>
-        </property>
-    </bean>
-
-    <bean id="outboxEventService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
-        <property name="transactionManager">
-            <ref bean="transactionManager"/>
-        </property>
-        <property name="target">
-            <ref bean="outboxEventServiceTarget"/>
-        </property>
-        <property name="transactionAttributes">
-            <props>
-                <prop key="save">PROPAGATION_REQUIRED</prop>
-            </props>
-        </property>
-    </bean>
-
 </beans>

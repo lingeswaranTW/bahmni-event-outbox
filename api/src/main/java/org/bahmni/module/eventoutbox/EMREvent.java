@@ -1,9 +1,11 @@
 package org.bahmni.module.eventoutbox;
 
+import lombok.Getter;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.core.ResolvableType;
 import org.springframework.core.ResolvableTypeProvider;
 
+@Getter
 public class EMREvent<T> extends ApplicationEvent implements ResolvableTypeProvider {
 
     private final T entity;
@@ -28,33 +30,5 @@ public class EMREvent<T> extends ApplicationEvent implements ResolvableTypeProvi
     @Override
     public ResolvableType getResolvableType() {
         return ResolvableType.forClassWithGenerics(getClass(), ResolvableType.forInstance(this.entity));
-    }
-
-    public T getEntity() {
-        return entity;
-    }
-
-    public EventAction getAction() {
-        return action;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getUri() {
-        return uri;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public String getTags() {
-        return tags;
     }
 }

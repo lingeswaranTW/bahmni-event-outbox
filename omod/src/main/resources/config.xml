@@ -15,7 +15,7 @@
 
 	<databaseChangelogFile>liquibase.xml</databaseChangelogFile>
 
-	<mappingFiles>
-		OutboxEvent.hbm.xml
-	</mappingFiles>
+	<packagesWithMappedClasses>
+		org.bahmni.module.eventoutbox.model
+	</packagesWithMappedClasses>
 </module>
