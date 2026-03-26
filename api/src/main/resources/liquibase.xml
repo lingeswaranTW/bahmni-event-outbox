@@ -23,7 +23,21 @@
             <column name="object" type="varchar(1000)"/>
             <column name="category" type="varchar(255)"/>
             <column name="tags" type="varchar(255)"/>
+            <column name="serialized_object" type="MEDIUMTEXT"/>
         </createTable>
+    </changeSet>
+
+    <changeSet id="bahmni-event-outbox-20260323-2" author="bahmni">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="event_records_queue"/>
+            <not>
+                <columnExists tableName="event_records_queue" columnName="serialized_object"/>
+            </not>
+        </preConditions>
+        <comment>Add serialized_object column to event_records_queue if not present</comment>
+        <addColumn tableName="event_records_queue">
+            <column name="serialized_object" type="MEDIUMTEXT"/>
+        </addColumn>
     </changeSet>
 
 </databaseChangeLog>

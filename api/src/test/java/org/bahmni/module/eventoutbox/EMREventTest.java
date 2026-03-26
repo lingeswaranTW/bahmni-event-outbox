@@ -5,6 +5,7 @@ import org.springframework.core.ResolvableType;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 public class EMREventTest {
 
@@ -18,7 +19,7 @@ public class EMREventTest {
     public void shouldReturnCorrectResolvableTypeForConcreteEntity() {
         Appointment appointment = new Appointment("apt-uuid-1");
         EMREvent<Appointment> event = new EMREvent<>(
-                appointment, EventAction.CREATED, "appointment", "Appointment",
+                appointment, "appointment", "Appointment",
                 "/openmrs/ws/rest/v1/appointment/apt-uuid-1", "/openmrs/ws/rest/v1/appointment/apt-uuid-1"
         );
 
@@ -33,7 +34,7 @@ public class EMREventTest {
     public void shouldDefaultTagsToCategoryWhenTagsIsNull() {
         Appointment appointment = new Appointment("apt-uuid-2");
         EMREvent<Appointment> event = new EMREvent<>(
-                appointment, EventAction.UPDATED, "appointment", "Appointment",
+                appointment, "appointment", "Appointment",
                 "/openmrs/ws/rest/v1/appointment/apt-uuid-2", "/openmrs/ws/rest/v1/appointment/apt-uuid-2"
         );
 
@@ -44,16 +45,39 @@ public class EMREventTest {
     public void shouldReturnAllFieldValuesSetInConstructor() {
         Appointment appointment = new Appointment("apt-uuid-3");
         EMREvent<Appointment> event = new EMREvent<>(
-                appointment, EventAction.DELETED, "appointment", "Appointment",
+                appointment, "appointment", "Appointment",
                 "/openmrs/ws/rest/v1/appointment/apt-uuid-3", "{\"uuid\":\"apt-uuid-3\"}"
         );
 
         assertEquals(appointment, event.getEntity());
-        assertEquals(EventAction.DELETED, event.getAction());
         assertEquals("appointment", event.getCategory());
         assertEquals("Appointment", event.getTitle());
         assertEquals("/openmrs/ws/rest/v1/appointment/apt-uuid-3", event.getUri());
         assertEquals("{\"uuid\":\"apt-uuid-3\"}", event.getContent());
         assertEquals("appointment", event.getTags());
+    }
+
+    @Test
+    public void shouldDefaultSerializedObjectToNullWhenUsingBasicConstructor() {
+        Appointment appointment = new Appointment("apt-uuid-4");
+        EMREvent<Appointment> event = new EMREvent<>(
+                appointment, "appointment", "Appointment",
+                "/openmrs/ws/rest/v1/appointment/apt-uuid-4", "{\"uuid\":\"apt-uuid-4\"}"
+        );
+
+        assertNull(event.getSerializedObject());
+    }
+
+    @Test
+    public void shouldSetSerializedObjectWhenUsingFullConstructor() {
+        Appointment appointment = new Appointment("apt-uuid-5");
+        String serializedObject = "{\"uuid\":\"apt-uuid-5\",\"status\":\"Scheduled\"}";
+        EMREvent<Appointment> event = new EMREvent<>(
+                appointment, "appointment", "Appointment",
+                "/openmrs/ws/rest/v1/appointment/apt-uuid-5", "{\"uuid\":\"apt-uuid-5\"}",
+                serializedObject
+        );
+
+        assertEquals(serializedObject, event.getSerializedObject());
     }
 }

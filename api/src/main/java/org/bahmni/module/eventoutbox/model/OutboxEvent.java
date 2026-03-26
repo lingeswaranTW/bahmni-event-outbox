@@ -3,6 +3,7 @@ package org.bahmni.module.eventoutbox.model;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,4 +27,7 @@ public class OutboxEvent {
     private String object;
     private String category;
     private String tags;
+
+    @Column(name = "serialized_object", columnDefinition = "MEDIUMTEXT")
+    private String serializedObject;
 }

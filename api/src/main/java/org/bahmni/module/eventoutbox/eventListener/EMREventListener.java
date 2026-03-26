@@ -30,6 +30,7 @@ public class EMREventListener {
         outboxEvent.setObject(event.getContent());
         outboxEvent.setCategory(event.getCategory());
         outboxEvent.setTags(event.getTags());
+        outboxEvent.setSerializedObject(event.getSerializedObject());
         outboxEventService.save(outboxEvent);
     }
 }
