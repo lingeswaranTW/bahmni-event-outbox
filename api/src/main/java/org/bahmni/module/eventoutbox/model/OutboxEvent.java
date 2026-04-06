@@ -14,7 +14,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-@Table(name = "event_records_queue")
+@Table(name = "event_records_queue1")
 public class OutboxEvent {
 
     @Id
@@ -24,10 +24,9 @@ public class OutboxEvent {
     private String title;
     private Date timestamp;
     private String uri;
-    private String object;
+    @Column(name = "object")
+    private String content;
     private String category;
     private String tags;
 
-    @Column(name = "serialized_object", columnDefinition = "MEDIUMTEXT")
-    private String serializedObject;
 }

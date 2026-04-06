@@ -57,27 +57,4 @@ public class EMREventTest {
         assertEquals("appointment", event.getTags());
     }
 
-    @Test
-    public void shouldDefaultSerializedObjectToNullWhenUsingBasicConstructor() {
-        Appointment appointment = new Appointment("apt-uuid-4");
-        EMREvent<Appointment> event = new EMREvent<>(
-                appointment, "appointment", "Appointment",
-                "/openmrs/ws/rest/v1/appointment/apt-uuid-4", "{\"uuid\":\"apt-uuid-4\"}"
-        );
-
-        assertNull(event.getSerializedObject());
-    }
-
-    @Test
-    public void shouldSetSerializedObjectWhenUsingFullConstructor() {
-        Appointment appointment = new Appointment("apt-uuid-5");
-        String serializedObject = "{\"uuid\":\"apt-uuid-5\",\"status\":\"Scheduled\"}";
-        EMREvent<Appointment> event = new EMREvent<>(
-                appointment, "appointment", "Appointment",
-                "/openmrs/ws/rest/v1/appointment/apt-uuid-5", "{\"uuid\":\"apt-uuid-5\"}",
-                serializedObject
-        );
-
-        assertEquals(serializedObject, event.getSerializedObject());
-    }
 }

@@ -14,9 +14,8 @@ public class EMREvent<T> extends ApplicationEvent implements ResolvableTypeProvi
     private final String uri;
     private final String content;
     private final String tags;
-    private final String serializedObject;
 
-    public EMREvent(T entity, String category, String title, String uri, String content, String serializedObject) {
+    public EMREvent(T entity, String category, String title, String uri, String content) {
         super(entity);
         this.entity = entity;
         this.category = category;
@@ -24,11 +23,6 @@ public class EMREvent<T> extends ApplicationEvent implements ResolvableTypeProvi
         this.uri = uri;
         this.content = content;
         this.tags = category;
-        this.serializedObject = serializedObject;
-    }
-
-    public EMREvent(T entity, String category, String title, String uri, String content) {
-        this(entity, category, title, uri, content, null);
     }
 
     @Override

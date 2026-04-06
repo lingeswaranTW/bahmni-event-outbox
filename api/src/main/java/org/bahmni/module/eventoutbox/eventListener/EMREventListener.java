@@ -27,10 +27,9 @@ public class EMREventListener {
         outboxEvent.setTitle(event.getTitle());
         outboxEvent.setTimestamp(new Date());
         outboxEvent.setUri(event.getUri());
-        outboxEvent.setObject(event.getContent());
+        outboxEvent.setContent(event.getContent());
         outboxEvent.setCategory(event.getCategory());
         outboxEvent.setTags(event.getTags());
-        outboxEvent.setSerializedObject(event.getSerializedObject());
         outboxEventService.save(outboxEvent);
     }
 }
